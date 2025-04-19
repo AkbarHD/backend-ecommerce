@@ -3,8 +3,10 @@
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\SizeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -22,4 +24,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('categories', [CategoryController::class, 'store']);
 
     Route::resource('brands', BrandController::class);
+
+    Route::get('sizes', [SizeController::class, 'index']);
 });
