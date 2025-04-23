@@ -25,17 +25,19 @@ class TemImageController extends Controller
             ], 400);
         }
 
+        // jika tidak ada image
         $tempImage = new TempImage();
         $tempImage->name = "Save dummy image";
         $tempImage->save();
 
+        // jika ada image
         $image = $request->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('uploads/temp'), $imageName);
-
         $tempImage->name = $imageName;
         $tempImage->save();
 
+        // untuk resize gambar
         $manager = new ImageManager(Driver::class);
         $img = $manager->read(public_path('uploads/temp/' . $imageName)); // 800 x 600
         $img->coverDown(400, 450);
