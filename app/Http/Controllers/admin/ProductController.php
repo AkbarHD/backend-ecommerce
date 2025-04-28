@@ -64,9 +64,7 @@ class ProductController extends Controller
         if (!empty($request->galery)) { // jika ada galery
             foreach ($request->galery as $key => $tempImageId) {
                 $tempImage = TempImage::find($tempImageId);
-
                 // large thumbnail
-
                 $extArray = explode('.', $tempImage->name);
                 $ext = end($extArray);
 
@@ -76,7 +74,6 @@ class ProductController extends Controller
                 $img->scaleDown(1200);
                 $img->save(public_path('uploads/products/large/' . $imageName)); // 800 x 600
                 // small thumbnail
-
                 $manager = new ImageManager(Driver::class);
                 $img = $manager->read(public_path('uploads/temp/' . $tempImage->name)); // 800 x 600
                 $img->coverDown(400, 460);
